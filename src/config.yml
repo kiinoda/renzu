@@ -1,0 +1,18 @@
+- route: /deploy/esp/:client
+  cmds:
+    - echo deploy_esp :client
+    - echo test_esp :client
+
+- route: /deploy/esp/:client/branch/:branch
+  cmds:
+    - echo deploy_esp :client :branch
+    - echo test_esp :client branch :branch
+    - cat .git/config
+
+- route: /deploy/:setup
+  cmds:
+    - echo deploy :setup
+
+- route: /sync/:setup
+  cmds:
+    - echo sync :setup

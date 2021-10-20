@@ -1,0 +1,19 @@
+name: kemal
+version: 0.1.0
+
+authors:
+  - George R. NICA <grn@infinium.io>
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  sentry:
+    github: samueleaton/sentry
+
+targets:
+  kemal:
+    main: src/kemal.cr
+
+crystal: 1.2.0
+
+license: MIT
