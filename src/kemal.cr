@@ -19,14 +19,7 @@ operations.each do |op|
     op.cmds.each do |command|
       parts = Deployer.get_parts(command)
       command = Deployer.normalize_command(command, parts, env.params.url)
-
-      cmd = command.split[0]
-      args = command.split[1..]
-      stdout = IO::Memory.new
-      process = Process.new(cmd, args, output: stdout, error: stdout)
-      status = process.wait
-      output += process.pid.to_s
-      output += stdout.to_s
+      output += Deployer.runner(command)
     end
     output
   end

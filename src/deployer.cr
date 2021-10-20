@@ -7,6 +7,7 @@ class Deployer
     unprefixed = prefixed.map do |part|
       part[1..]
     end
+    return unprefixed
   end
 
   # normalize command passed in via yaml with values from URL/route
@@ -14,6 +15,15 @@ class Deployer
     parts.each do |p|
       command = command.sub(":#{p}", substitutions[p])
     end
-    command
+    return command
+  end
+
+  def self.runner(command : String)
+    cmd = command.split[0]
+    args = command.split[1..]
+    stdout = IO::Memory.new
+    process = Process.new(cmd, args, output: stdout, error: stdout)
+    status = process.wait
+    return output
   end
 end
