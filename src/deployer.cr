@@ -24,6 +24,6 @@ class Deployer
     stdout = IO::Memory.new
     process = Process.new(cmd, args, output: stdout, error: stdout)
     status = process.wait
-    return output
+    return stdout
   end
 end
