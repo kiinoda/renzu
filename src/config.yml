@@ -8,6 +8,10 @@
     - echo deploy_esp :client :branch
     - echo test_esp :client branch :branch
     - cat .git/config
+    # - ssh turret.infm ls -al
+    # - ssh mx-c.infm 'mailq'
+    - ls -al testarstarstarst
+    - ls -alR /Users/grn
 
 - route: /deploy/:setup
   cmds:

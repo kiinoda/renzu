@@ -17,13 +17,4 @@ class Deployer
     end
     return command
   end
-
-  def self.runner(command : String)
-    cmd = command.split[0]
-    args = command.split[1..]
-    stdout = IO::Memory.new
-    process = Process.new(cmd, args, output: stdout, error: stdout)
-    status = process.wait
-    return stdout.to_s
-  end
 end
