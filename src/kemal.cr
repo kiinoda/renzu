@@ -4,21 +4,24 @@ require "./deployer"
 
 Kemal.config.powered_by_header = false
 
-class Route
+class Action
   include YAML::Serializable
   @[YAML::Field(key: "route")]
   property route : String
   @[YAML::Field(key: "cmds")]
-  property cmds : Array(String)
+  property commands : Array(String)
 end
 
-operations = Array(Route).from_yaml(File.read("./src/config.yml"))
-operations.each do |op|
-  get op.route do |env|
-    op.cmds.each do |command|
-      parts = Deployer.get_parts(command)
-      command = Deployer.normalize_command(command, parts, env.params.url)
+actions = Array(Action).from_yaml(File.read("./src/actions.yml"))
+
+actions.each do |action|
+  get action.route do |env|
+    action.commands.each do |command|
+      segments = Deployer.get_segments(command)
+      command = Deployer.normalize_command(command, segments, env.params.url)
+
       cmd, args = command.split[0], command.split[1..]
+
       # if client hangs up, we don't want an error hence the begin...rescue block
       begin
         Process.run(cmd, args) do |proc|
@@ -32,13 +35,14 @@ operations.each do |op|
       rescue ex : IO::Error
         Log.error {"IO::Error, #{ex}"}
       end
-    end
-  end
-end
+    end # rescue block
+  end # get route
+end # route configurator
 
 [404, 500].each do |e|
   error e do
     "Go away!"
   end
 end
+
 Kemal.run

@@ -1,10 +1,10 @@
 - route: /deploy/esp/:client
-  cmds:
+  commands:
     - echo deploy_esp :client
     - echo test_esp :client
 
 - route: /deploy/esp/:client/branch/:branch
-  cmds:
+  commands:
     - echo deploy_esp :client :branch
     - echo test_esp :client branch :branch
     - cat .git/config
@@ -14,9 +14,9 @@
     - ls -alR /Users/grn
 
 - route: /deploy/:setup
-  cmds:
+  commands:
     - echo deploy :setup
 
 - route: /sync/:setup
-  cmds:
+  commands:
     - echo sync :setup
