@@ -34,7 +34,7 @@ actions.each do |action|
           end
         end
       rescue HTTP::Server::ClientError
-        Log.error {"Client hang up before we completed."}
+        Log.error {"Client hung up before we completed."}
       rescue ex : IO::Error
         Log.error {"IO::Error, #{ex}"}
       end
