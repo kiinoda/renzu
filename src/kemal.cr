@@ -1,6 +1,6 @@
 require "kemal"
 require "yaml"
-require "./deployer"
+require "./utils"
 
 Kemal.config.powered_by_header = false
 
@@ -8,7 +8,7 @@ class Action
   include YAML::Serializable
   @[YAML::Field(key: "route")]
   property route : String
-  @[YAML::Field(key: "cmds")]
+  @[YAML::Field(key: "commands")]
   property commands : Array(String)
 end
 
@@ -16,9 +16,12 @@ actions = Array(Action).from_yaml(File.read("./src/actions.yml"))
 
 actions.each do |action|
   get action.route do |env|
+    if !Utils.has_safe_segments(env.params.url)
+      halt env, status_code: 400, response: "Invalid data provided."
+    end
     action.commands.each do |command|
-      segments = Deployer.get_segments(command)
-      command = Deployer.normalize_command(command, segments, env.params.url)
+      segments = Utils.get_segments(command)
+      command = Utils.normalize_command(command, segments, env.params.url)
 
       cmd, args = command.split[0], command.split[1..]
 
