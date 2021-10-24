@@ -38,14 +38,14 @@ Goodbye john
 
 Renzu is further configurable using the following ENV variables:
 
-- PORT - listens to TCP:8192 by default
-- HOST_BINDING - binds to 127.0.0.1 by default
-- CONFIG - reads routes & actions from actions.yml by default
+- `PORT` - listens to `TCP:8192` by default
+- `HOST_BINDING` - binds to `127.0.0.1` by default
+- `CONFIG` - reads routes & actions from `actions.yml` in local directory by default
 
 ## Warning
 
 If, for some reason, you decide you want to shoot yourself in the foot with a powerful gun, you'll still need the following:
-  - a supervisor like supervisord to babysit and log output
+  - a supervisor like supervisord to babysit and log output for future reference
   - a web server like apache, nginx, caddy with some form of authentication (basic auth / Oauth2) that proxies to renzu
   - SSL certificates to encrypt the connection (caddy does this out of the box)
   - even better, some VPN from you to the machine hosting renzu
