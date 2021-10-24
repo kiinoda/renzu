@@ -16,7 +16,7 @@ crystal build src/renzu.cr
 
 ## Usage
 
-You need to either create `actions.yml` or copy the existing `actions.yml.sample` and edit accordingly. By default, `renzu` runs on port 8192 and searches for `action.yml` in the current directory.
+You need to either create `actions.yml` or copy the existing `actions.yml.sample` and edit accordingly. By default, `renzu` listens on `127.0.0.1:8192` and searches for `action.yml` in the current directory.
 
 The structure of `actions.yml` is an array of route/actions pairs. Per any route, one or many actions can be defined. Furthermore, any route can define `:segments` such as `/say/:greeting/to/:user`, and the values picked up from the `:segments` can then be used in the action that will be run, with that data passed as a parameter, if you need.
 
