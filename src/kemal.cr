@@ -2,7 +2,12 @@ require "kemal"
 require "yaml"
 require "./utils"
 
+Kemal.config.port = (ENV["PORT"]? || 8192).to_i
+Kemal.config.host_binding = ENV["HOST_BINDING"]? || "127.0.0.1"
+Kemal.config.env = "production"
 Kemal.config.powered_by_header = false
+
+APP_CONFIG = ENV["CONFIG"]? || "actions.yml"
 
 class Action
   include YAML::Serializable
@@ -12,7 +17,10 @@ class Action
   property commands : Array(String)
 end
 
-actions = Array(Action).from_yaml(File.read("./src/actions.yml"))
+actions, err = Utils.load_yaml(APP_CONFIG)
+if nil != err
+  abort(err)
+end
 
 actions.each do |action|
   get action.route do |env|

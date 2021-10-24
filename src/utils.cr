@@ -1,5 +1,16 @@
 class Utils
 
+  def self.load_yaml(config : String)
+    err = nil
+    actions = [] of Action
+    begin
+      actions = Array(Action).from_yaml(File.read(config))
+    rescue ex
+      err = "Could not load YAML file."
+    end
+    return actions, err
+  end
+
   # extract only those parts from the command which begin with semicolon
   def self.get_segments(command : String)
     # extract them from the command line
