@@ -26,14 +26,14 @@ Eg:
 - route: /say/:greeting/to/:user
   actions:
     - echo :greeting :user
-    - echo Goodbye :user
+    - echo goodbye :user
 ```
 If you hit that endpoint as `/say/hello/to/john`, the remote system is going to run the 2 commands and you should see the following output:
 
 ```shell
 # curl http://localhost:8192/say/hello/to/john
 hello john
-Goodbye john
+goodbye john
 ```
 
 Renzu is further configurable using the following ENV variables:
