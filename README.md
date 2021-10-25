@@ -45,11 +45,11 @@ Renzu is further configurable using the following ENV variables:
 ## Warning
 
 If, for some reason, you decide you want to shoot yourself in the foot with a powerful gun, you'll still need the following:
-  - a supervisor like supervisord to babysit and log output for future reference
-  - a web server like apache, nginx, caddy with some form of authentication (basic auth / Oauth2) that proxies to renzu
-  - SSL certificates to encrypt the connection (caddy does this out of the box)
-  - even better, some VPN from you to the machine hosting renzu
 
+- a supervisor like supervisord to babysit and log output for future reference
+- a web server like apache, nginx, caddy with some form of authentication (basic auth / Oauth2) that proxies to renzu
+- SSL certificates to encrypt the connection (caddy does this out of the box)
+- even better, some VPN from you to the machine hosting renzu
 
 ## Development
 
