@@ -30,8 +30,8 @@ actions.each do |action|
     action.commands.each do |command|
       segments = Utils.get_segments(command)
       command = Utils.normalize_command(command, segments, env.params.url)
-      cmd_array = Utils.parse_command(command)
-      cmd, args = cmd_array[0], cmd_array[1..]
+
+      cmd, args = command.split[0], command.split[1..]
 
       # if client hangs up, we don't want an error hence the begin...rescue block
       begin

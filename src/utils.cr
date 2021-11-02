@@ -27,21 +27,6 @@ class Utils
     return command
   end
 
-  # parse command, keeping single quoted strings as a single param
-  def self.parse_command(command : String)
-    params = Array(String|Nil).new
-    regex = /('[^']*'|\S+)(.*)/
-    while m = command.match(regex)
-        p = m.captures[0]
-        if p
-            params << p.lchop("'").rchop("'")
-        end
-        c = m.captures[1]
-        command = c ? c : ""
-    end
-    return params
-  end
-
   # check sanity of segments
   def self.has_safe_segments(segments : Hash)
     # check for valid values & lengths
