@@ -52,7 +52,7 @@ end # route configurator
 
 [404, 500].each do |e|
   error e do
-    "Go away!"
+    ""
   end
 end
 
