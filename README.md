@@ -8,7 +8,7 @@ Using it, you can expose something like `mailq` under `/api/mailq`, a cache clea
 
 At the time being, you need to build Renzu yourself in order to install it.
 
-```
+```sh
 git clone $REPO
 cd $REPO
 crystal build src/renzu.cr
@@ -28,6 +28,7 @@ Eg:
     - echo :greeting :user
     - echo goodbye :user
 ```
+
 If you hit that endpoint as `/say/hello/to/john`, the remote system is going to run the 2 commands and you should see the following output:
 
 ```shell
