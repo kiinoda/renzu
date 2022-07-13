@@ -28,7 +28,7 @@ actions.each do |action|
       halt env, status_code: 400, response: "Invalid data provided."
     end
     action.commands.each do |command|
-      segments = Utils.get_segments(command)
+      segments = Utils.get_segments(env.params.url)
       command = Utils.normalize_command(command, segments, env.params.url)
 
       cmd, args = command.split[0], command.split[1..]
