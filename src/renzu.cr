@@ -31,16 +31,11 @@ actions.each do |action|
       segments = Utils.get_segments(env.params.url)
       command = Utils.normalize_command(command, segments, env.params.url)
 
-      cmd, args = command.split[0], command.split[1..]
-
       # if client hangs up, we don't want an error hence the begin...rescue block
       begin
-        Process.run(cmd, args) do |proc|
-          while line = proc.output.gets || proc.error.gets
-            env.response.puts line
-            env.response.flush
-          end
-        end
+        output = `#{command}`
+        env.response.puts output
+        env.response.flush
       rescue HTTP::Server::ClientError
         Log.error {"Client hung up before we completed."}
       rescue ex : IO::Error
